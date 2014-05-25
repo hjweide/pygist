@@ -57,3 +57,13 @@ posted under the most popular tags on Flickr as negative training examples.
 
 Using 80% of the data as a training set and the remaining 20% for testing, the
 classifier achieves an accuracy of approximately 90%.
+
+To integrate this code with your own project is very simple:
+
+import os
+import pygist
+target_dir = '~/ibeis/pygist/test'
+imgpaths = [os.path.join(target_dir, f) for f in os.listdir(target_dir)]
+results = pygist.test(imgpaths)
+for img_name, result in zip(imgpaths, results):
+    print img_name, result
