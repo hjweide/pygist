@@ -1,1 +1,59 @@
-to run: python pygist.py
+                    ##### pygist #####
+A gist-based SVM image classifier based on Lear's GIST implementation.
+For more information, see the README in the gist directory, or visit
+http://people.csail.mit.edu/torralba/code/spatialenvelope/
+
+This is part of the larger IBEIS project, which is available at
+https://github.com/Erotemic/ibeis
+
+To use pygist, first clone the repository:
+
+git clone https://github.com/hjweide/pygist.git
+
+cd pygist
+mkdir test
+
+Copy the images from ~/ibeis/ibeis/testdb1 into the test directory,
+any other images are fine too, but these are easily available in the
+IBEIS project.
+
+Download a pre-trained model (approximately 75MB)
+wget https://www.dropbox.com/s/mbqovlwsk2j1tws/.learned_model.pickle
+
+In the terminal, run: python pygist.py
+
+This will output the names of all files in your test directory, along
+with a 1 or -1 classification of each.  An image marked with 1 indicates
+that the image was accepted as consistent with the training set, and an 
+image marked as -1 indicates that the image is not considered consistent
+with the training set.
+
+Example output using the above commands:
+
+:~/ibeis/pygist$ time python pygist.py 
+Stage 1: pre-classifying data using 5 classifiers...
+Stage 2: final classification on 13 datapoints...
+~/ibeis/pygist/test/hard2.JPG 1
+~/ibeis/pygist/test/jeff.png -1
+~/ibeis/pygist/test/polar1.jpg -1
+~/ibeis/pygist/test/zebra.jpg 1
+~/ibeis/pygist/test/hard1.JPG -1
+~/ibeis/pygist/test/easy1.JPG 1
+~/ibeis/pygist/test/easy2.JPG 1
+~/ibeis/pygist/test/hard3.JPG -1
+~/ibeis/pygist/test/lena.jpg -1
+~/ibeis/pygist/test/polar2.jpg -1
+~/ibeis/pygist/test/occl2.JPG -1
+~/ibeis/pygist/test/occl1.JPG 1
+~/ibeis/pygist/test/easy3.JPG 1
+
+real    0m0.960s
+user    0m0.820s
+sys     0m0.136s
+
+This model was trained using the IBEIS2014 dataset created by Jason Parham
+and Hendrik Weideman as positive training examples, and a collection of images
+posted under the most popular tags on Flickr as negative training examples.
+
+Using 80% of the data as a training set and the remaining 20% for testing, the
+classifier achieves an accuracy of approximately 90%.
