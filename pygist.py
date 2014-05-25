@@ -198,14 +198,14 @@ def test(imgpaths, outdir='.pygist_resized_test', datafile='.learned_model.pickl
 
 
 if __name__ == '__main__':
-    target_dir = '/home/hendrik/ibeis/pygist/images'
-    imgpaths = [os.path.join(target_dir, f) for f in os.listdir(target_dir)]
-    labels = [1 if '2014' in f else -1 for f in imgpaths]
+    #target_dir = '/home/hendrik/ibeis/pygist/images'
+    #imgpaths = [os.path.join(target_dir, f) for f in os.listdir(target_dir)]
+    #labels = [1 if '2014' in f else -1 for f in imgpaths]
     #for i, l in zip(imgpaths, labels):
     #    print i, l
     #train(imgpaths, labels, k=5)
 
-    target_dir = '/home/hendrik/ibeis/pygist/images2'
+    target_dir = '/home/hendrik/ibeis/pygist/images3'
     imgpaths = [os.path.join(target_dir, f) for f in os.listdir(target_dir)]
     results = test(imgpaths)
     for i, r in zip(imgpaths, results):
