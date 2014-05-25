@@ -163,6 +163,9 @@ def train(imgpaths, labels, outmodel='.learned_model.pickle', k=5, trfrac=0.8):
     pickle.dump(learned_model, open(outmodel, 'wb'))
 
 
+# imgpaths: full paths to the images that make up the dataset
+# outdir:   directory where the resized images will be saved
+# datafile: the file from which the pre-trained model should be loaded (if it exists)
 def test(imgpaths, outdir='.pygist_resized_test', datafile='.learned_model.pickle'):
     if os.path.isfile(datafile):
         learned_model = pickle.load(open(datafile, 'rb'))
@@ -205,7 +208,7 @@ if __name__ == '__main__':
     #    print i, l
     #train(imgpaths, labels, k=5)
 
-    target_dir = '/home/hendrik/ibeis/pygist/images3'
+    target_dir = '/home/hendrik/ibeis/pygist/test'
     imgpaths = [os.path.join(target_dir, f) for f in os.listdir(target_dir)]
     results = test(imgpaths)
     for i, r in zip(imgpaths, results):
