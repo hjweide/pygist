@@ -18,7 +18,7 @@ def build_command():
 
 INSTALL_REQUIRES = [
     'detecttools >= 1.0.0.dev1',
-    'sklearn >= 0.14.1',
+    'scikit-learn >= 0.14.1',
 ]
 
 if __name__ == '__main__':
@@ -26,7 +26,7 @@ if __name__ == '__main__':
         name='pygist',
         build_command=build_command,
         description=('Filters images using gist descriptors'),
-        url='https://github.com/bluemellophone/pyrf',
+        url='https://github.com/hjweide/pygist',
         author='Hendrik Weideman',
         author_email='weideh@rpi.edu',
         packages=['pygist'],
