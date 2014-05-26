@@ -7,13 +7,7 @@ set(CMAKE_BUILD_TYPE "Release")
 # FFTW (fast fourier transform)
 ################
 SET(FFTW_SEARCH_PATHS
-    ${CMAKE_SOURCE_DIR}/fftw
-    ${CMAKE_SOURCE_DIR}/fftw-3.2.2/
-    ${CMAKE_SOURCE_DIR}/fftw-3.2.2/lib/
-    ${CMAKE_SOURCE_DIR}/../fftw-3.2.2/
-    ${CMAKE_SOURCE_DIR}/../fftw-3.2.2/lib/
-    ${CMAKE_SOURCE_DIR}/build/dist/lib
-    ${CMAKE_SOURCE_DIR}/../build/dist/lib
+    ${CMAKE_SOURCE_DIR}/fftw-3.3.4-dll32
     /usr/lib
     $ENV{LD_LIBRARY_PATH}
     $ENV{FFTW_HOME}/lib )
@@ -78,28 +72,23 @@ set(SOURCE_FILES
     ${CMAKE_SOURCE_DIR}/gist/standalone_image.h)
 
 include_directories(${CMAKE_SOURCE_DIR}/gist)
-include_directories(${FFTW_INCLUDE_DIR})
+include_directories(${FFTW_INCLUDE_DIR})  # unix include
+include_directories(${FFTW_PATH})   # win32 include
 
-
+# Add definition flags
 add_definitions(-DUSE_GIST -DSTANDALONE_GIST)
 
 add_executable(compute_gist ${SOURCE_FILES})
 
-#SET_TARGET_PROPERTIES(gist PROPERTIES COMPILE_FLAGS "-DUSE_GIST -DSTANDALONE_GIST")
-#SET_TARGET_PROPERTIES(compute_gist PROPERTIES COMPILE_FLAGS "-DUSE_GIST -DSTANDALONE_GIST")
-
 ########################################
-#message("FFTW_LIB  = ${FFTW_LIB}")
-#message("FFTW_PATH = ${FFTW_PATH}")
-#message("FFTW_INCLUDE_DIR = ${FFTW_INCLUDE_DIR}")
-#message("FFTW_LIBRARIES = ${FFTW_LIBRARIES}")
-#message("M_LIB = ${M_LIB}")
-#message("CMAKE_C_FLAGS = ${CMAKE_C_FLAGS}")
-#message("CMAKE_CXX_FLAGS = ${CMAKE_CXX_FLAGS}")
-#message("CMAKE_SHARED_LINKER_FLAGS = ${CMAKE_SHARED_LINKER_FLAGS}")
-#message("CMAKE_EXE_LINKER_FLAGS = ${CMAKE_EXE_LINKER_FLAGS}")
-
-#target_link_libraries(gist -DUSE_GIST -DSTANDALONE_GIST)
-
+message("FFTW_LIB  = ${FFTW_LIB}")
+message("FFTW_PATH = ${FFTW_PATH}")
+message("FFTW_INCLUDE_DIR = ${FFTW_INCLUDE_DIR}")
+message("FFTW_LIBRARIES = ${FFTW_LIBRARIES}")
+message("M_LIB = ${M_LIB}")
+message("CMAKE_C_FLAGS = ${CMAKE_C_FLAGS}")
+message("CMAKE_CXX_FLAGS = ${CMAKE_CXX_FLAGS}")
+message("CMAKE_SHARED_LINKER_FLAGS = ${CMAKE_SHARED_LINKER_FLAGS}")
+message("CMAKE_EXE_LINKER_FLAGS = ${CMAKE_EXE_LINKER_FLAGS}")
 
 target_link_libraries(compute_gist ${FFTW_LIB} ${M_LIB})

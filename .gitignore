@@ -69,3 +69,5 @@ tmp.py
 *.npz
 
 install_prereqs.sh
+
+fftw-3.3.4-dll*

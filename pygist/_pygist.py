@@ -33,7 +33,7 @@ def compute_gist_descriptors(imgpaths, datafile='.descriptors.pickle'):
 
     descriptors = []
     for imgpath in imgpaths:
-        if basename(imgpath).lower().endswith('.pgm'):
+        if basename(imgpath).lower().endswith('.ppm'):
             # launch the compute_gist C executable
             c_args = [COMPUTE_GIST_EXE, imgpath]
             desc = subprocess.check_output(c_args).strip().split(' ')
@@ -68,7 +68,7 @@ def resize_images(imgpaths, outdir):
         # get the filename without its path and extension
         base = basename(imgpath)
         base_no_ext = splitext(base)[0]
-        outpath = join(outdir, base_no_ext + '.pgm')
+        outpath = join(outdir, base_no_ext + '.ppm')
         outpaths.append(outpath)
         cv2.imwrite(outpath, img)
 

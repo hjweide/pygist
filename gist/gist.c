@@ -777,6 +777,13 @@ static float *color_gist_gabor(color_image_t *src, const int w, image_list_t *G)
 
     float *res = (float *) malloc(3*w*w*G->size*sizeof(float));
 
+    /* Attempt to see if this solve win32 error
+    for(i = 0; i < 3*w*w*G->size; i++)
+    {
+        res[i] = 0.0;
+    }
+    */
+
     fftwf_complex *ina1  = (fftwf_complex *) fftwf_malloc(width*height*sizeof(fftwf_complex));
     fftwf_complex *ina2  = (fftwf_complex *) fftwf_malloc(width*height*sizeof(fftwf_complex));
     fftwf_complex *ina3  = (fftwf_complex *) fftwf_malloc(width*height*sizeof(fftwf_complex));
@@ -944,6 +951,7 @@ float *color_gist(color_image_t *src, int w, int a, int b, int c) {
 float *color_gist_scaletab(color_image_t *src, int w, int n_scale, const int *n_orientation)
 {
     int i;
+    int j;
 
     if(src->width < 8 || src->height < 8)
     {
@@ -963,11 +971,24 @@ float *color_gist_scaletab(color_image_t *src, int w, int n_scale, const int *n_
 
     float *g = color_gist_gabor(img, numberBlocks, G);
 
-    for(i = 0; i < tot_oris*w*w*3; i++)
+    for(i = 0; i < (tot_oris * w * w * 3); i++)
     {
         if(!finite(g[i]))
         {
+            /*fprintf(stderr, "Error: color_gist_scaletab() - descriptor not valid (nan or inf)\n");*/
             fprintf(stderr, "Error: color_gist_scaletab() - descriptor not valid (nan or inf)\n");
+            fprintf(stderr, "img->width = %d\n" ,  img->width);
+            fprintf(stderr, "img->height = %d\n" , img->height);
+            fprintf(stderr, "w = %d\n" , w);
+            fprintf(stderr, "n_scale = %d\n" , n_scale);
+            fprintf(stderr, "n_scale = %d\n" , n_scale);
+            fprintf(stderr, "tot_oris = %d\n", tot_oris);
+            fprintf(stderr, "i = %d\n" , i);
+            fprintf(stderr, "g = %p\n" , g);
+            for(j = 0; j < (10); j++)
+                {
+                fprintf(stderr, "g[%d] = %f\n", j, g[j]);
+                }
             free(g); g=NULL;
             break;
         }
