@@ -22,8 +22,5 @@ standalone_image.o: standalone_image.c standalone_image.h
 compute_gist: compute_gist.c gist.o standalone_image.o
 	gcc -Wall -g -o $@ $^ $(WFFTLIB) -lfftw3f
 
-
-
 clean: 
 	rm -f *.o compute_gist
-

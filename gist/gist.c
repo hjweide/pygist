@@ -1,6 +1,8 @@
 /* Lear's GIST implementation, version 1.1, (c) INRIA 2009, Licence: PSFL */
 /*--------------------------------------------------------------------------*/
 
+#define USE_GIST
+#define STANDALONE_GIST
 #ifdef USE_GIST
 
 /*--------------------------------------------------------------------------*/
@@ -18,7 +20,7 @@
 
 #include "gist.h"
 
-#else 
+#else
 
 #include <image.h>
 #include <descriptors.h>
@@ -199,7 +201,7 @@ static image_list_t *create_gabor(int nscales, const int *or, int width, int hei
     int i, j, fn;
 
     image_list_t *G = image_list_new();
-    
+
     int nfilters = 0;
     for(i=0;i<nscales;i++)  nfilters+=or[i];
 
@@ -695,7 +697,7 @@ static void color_down_N(float *res, color_image_t *src, int N, int c)
     fftw_lock();
 
     int i, j, k;
-    
+
     /* Get sizes */
     int width = src->width;
     int height = src->height;
@@ -769,7 +771,7 @@ static float *color_gist_gabor(color_image_t *src, const int w, image_list_t *G)
     fftw_lock();
 
     int i, j, k;
-    
+
     /* Get sizes */
     int width = src->width;
     int height = src->height;
@@ -929,7 +931,7 @@ float *bw_gist_scaletab(image_t *src, int w, int n_scale, const int *n_orientati
 
 /*--------------------------------------------------------------------------*/
 
-float *color_gist(color_image_t *src, int w, int a, int b, int c) {  
+float *color_gist(color_image_t *src, int w, int a, int b, int c) {
     int orientationsPerScale[3];
 
     orientationsPerScale[0] = a;
@@ -940,7 +942,7 @@ float *color_gist(color_image_t *src, int w, int a, int b, int c) {
 
 }
 
-float *color_gist_scaletab(color_image_t *src, int w, int n_scale, const int *n_orientation) 
+float *color_gist_scaletab(color_image_t *src, int w, int n_scale, const int *n_orientation)
 {
     int i;
 
@@ -960,8 +962,8 @@ float *color_gist_scaletab(color_image_t *src, int w, int n_scale, const int *n_
 
     color_prefilt(img, 4);
 
-    float *g = color_gist_gabor(img, numberBlocks, G);  
-    
+    float *g = color_gist_gabor(img, numberBlocks, G);
+
     for(i = 0; i < tot_oris*w*w*3; i++)
     {
         if(!finite(g[i]))
@@ -986,7 +988,7 @@ local_desc_list_t *descriptor_bw_gist_cpu(image_t *src, int a, int b, int c, int
 {
     local_desc_list_t *desc_list = local_desc_list_new();
 
-    float *desc_raw = bw_gist(src, w, a, b, c); 
+    float *desc_raw = bw_gist(src, w, a, b, c);
 
     local_desc_t *desc = local_desc_new();
 
@@ -1022,7 +1024,7 @@ local_desc_list_t *descriptor_color_gist_cpu(color_image_t *src, int a, int b, i
 
 /*--------------------------------------------------------------------------*/
 
-#endif 
+#endif
 
 #endif
 
