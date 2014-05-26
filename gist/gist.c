@@ -1,8 +1,7 @@
 /* Lear's GIST implementation, version 1.1, (c) INRIA 2009, Licence: PSFL */
 /*--------------------------------------------------------------------------*/
 
-#define USE_GIST
-#define STANDALONE_GIST
+
 #ifdef USE_GIST
 
 /*--------------------------------------------------------------------------*/
