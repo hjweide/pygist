@@ -1,4 +1,5 @@
 from __future__ import absolute_import, division, print_function
+import sys
 import os
 import cv2
 import cPickle
@@ -14,7 +15,10 @@ from . import model
 #                                           join(dirname(__file__), '../gist')])
 #COMPUTE_GIST_EXE = 'gist/./compute_gist'
 #COMPUTE_GIST_EXE = dirname(__file__) + '../gist/compute_gist'
-COMPUTE_GIST_EXE = dirname(__file__) + '/compute_gist.exe'
+
+COMPUTE_GIST_EXE = dirname(__file__) + '/compute_gist'
+if sys.platform == 'win32':
+    COMPUTE_GIST_EXE += '.exe'
 if not exists(COMPUTE_GIST_EXE):
     raise AssertionError("cannot find compute_gist")
 

@@ -17,7 +17,6 @@ def build_command():
 
 
 INSTALL_REQUIRES = [
-    'detecttools >= 1.0.0.dev1',
     'scikit-learn >= 0.14.1',
 ]
 
@@ -31,6 +30,7 @@ if __name__ == '__main__':
         author_email='weideh@rpi.edu',
         packages=['pygist'],
         install_requires=INSTALL_REQUIRES,
-        package_data={'build': util_cplat.get_dynamic_lib_globstrs()},
+        package_data={'build': util_cplat.get_dynamic_lib_globstrs() +
+                      ['compute_gist']},
         setup_fpath=__file__,
     )
