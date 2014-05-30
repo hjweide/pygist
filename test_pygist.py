@@ -13,8 +13,8 @@ if __name__ == '__main__':
     print('[pygist] Testing pygist')
     # Ensure you have test data
     print('[pygist] Ensuring testdata')
-    datafile       = utool.grab_file_url(TEST_MODEL_URL, appname='pygist')
-    test_image_dir = utool.grab_zipped_url(TEST_IMAGES_URL, appname='pygist')
+    datafile       = utool.grab_file_url(TEST_MODEL_URL, appname='utool')
+    test_image_dir = utool.grab_zipped_url(TEST_IMAGES_URL, appname='utool')
     imgpaths       = utool.list_images(test_image_dir, fullpath=True)   # test image paths
     outdir = utool.get_app_resource_dir('pygist')  # where to put results
     # Run pygist on test images
